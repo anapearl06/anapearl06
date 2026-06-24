@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ananya Shukla | Software Developer Portfolio</title>
+  <style>
+    /* --- CSS RESET & NOTEBOOK CONFIGURATION --- */
+    :root {
+        --yellow: #FFD54A;
+        --cyan: #89E7F7;
+        --orange: #FF8A00;
+        --white: #FFFFFF;
+        --black: #111111;
+        --paper: #FAFAFA;
+        --gray: #F0F0F0;
+        --border: 3px solid var(--black);
+        --shadow-sm: 4px 4px 0px var(--black);
+        --shadow: 6px 6px 0px var(--black);
+        --shadow-lg: 8px 8px 0px var(--black);
+        --radius: 6px;
+        --radius-lg: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace, sans-serif;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      /* Graph Paper Grid + Notebook Margin Line */
+      background-image: 
+        linear-gradient(90deg, transparent 99px, #FF8A00 99px, #FF8A00 101px, transparent 101px),
+        linear-gradient(#89E7F7 1px, transparent 1px),
+        linear-gradient(90deg, #89E7F7 1px, transparent 1px);
+      background-size: 100% 100%, 25px 25px, 25px 25px;
+      padding: 40px 40px 40px 140px;
+      overflow-x: hidden;
+    }
+
+    /* Notebook Ring Binder Elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 30px;
+      width: 20px;
+      height: 100%;
+      background-image: radial-gradient(circle, #111111 40%, transparent 45%);
+      background-size: 20px 50px;
+      opacity: 0.85;
+      z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 30px 15px 30px 55px;
+        background-image: 
+          linear-gradient(90deg, transparent 44px, #FF8A00 44px, #FF8A00 46px, transparent 46px),
+          linear-gradient(#89E7F7 1px, transparent 1px),
+          linear-gradient(90deg, #89E7F7 1px, transparent 1px);
+        background-size: 100% 100%, 20px 20px, 20px 20px;
+      }
+      body::before {
+        left: 10px;
+        background-size: 15px 40px;
+      }
+    }
+
+    /* --- COPIED HERO STYLING SPECIFICATIONS --- */
+    .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .hero {
+        padding: 60px 0 80px;
+        position: relative;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .hero-grid { grid-template-columns: 1.3fr 1fr; }
+    }
+
+    .hero-greeting {
+        font-size: 1.1rem;
+        font-weight: 800;
+        background: var(--cyan);
+        display: inline-block;
+        padding: 8px 18px;
+        border: var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 18px;
+        transform: rotate(-2deg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .hero-name {
+        font-size: 3.2rem;
+        font-weight: 900;
+        line-height: 1.05;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+    }
+
+    @media (min-width: 768px) {
+        .hero-name { font-size: 5rem; }
+    }
+
+    .hero-title {
+        font-size: 1.4rem;
+        font-weight: 900;
+        background: var(--orange);
+        color: var(--white);
+        display: inline-block;
+        padding: 10px 24px;
+        border: var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        transform: rotate(1deg);
+    }
+
+    .hero-desc {
+        font-size: 1.1rem;
+        max-width: 520px;
+        margin-bottom: 32px;
+        padding: 20px;
+        background: var(--white);
+        border: var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        line-height: 1.7;
+    }
+
+    .hero-cta {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 28px;
+        font-size: 1rem;
+        font-weight: 900;
+        text-decoration: none;
+        color: var(--black);
+        background: var(--white);
+        border: var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        transition: all 0.15s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary {
+        background: var(--orange);
+        color: var(--white);
+    }
+
+    .btn-secondary {
+        background: var(--cyan);
+    }
+
+    .photo-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .photo-frame {
+        width: 300px;
+        height: 300px;
+        background: var(--white);
+        border: var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        padding: 8px;
+    }
+
+    @media (min-width: 768px) {
+        .photo-frame {
+            width: 360px;
+            height: 360px;
+        }
+    }
+
+    .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        display: block;
+    }
+
+    .photo-badge {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: var(--yellow);
+        border: var(--border);
+        border-radius: var(--radius);
+        padding: 6px 14px;
+        font-weight: 900;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        box-shadow: var(--shadow-sm);
+        z-index: 5;
+    }
+
+    /* Doodle configurations */
+    .doodle-star {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        background: var(--yellow);
+        border: 2px solid var(--black);
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        z-index: 5;
+    }
+
+    .ds-1 { top: -10px; left: -10px; background: var(--yellow); }
+    .ds-2 { bottom: -5px; right: -10px; background: var(--orange); width: 22px; height: 22px; }
+    .ds-3 { top: 50%; left: -15px; background: var(--cyan); width: 20px; height: 20px; transform: translateY(-50%); }
+    .ds-4 { top: 20px; right: -12px; background: var(--yellow); width: 18px; height: 18px; }
+
+    .doodle-arrow {
+        position: absolute;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--black);
+        z-index: 5;
+    }
+
+    .da-1 { top: -30px; left: 50%; transform: translateX(-50%) rotate(-15deg); }
+    .da-2 { bottom: -20px; left: 20px; transform: rotate(20deg); }
+
+    /* --- STRICT NEO-BRUTALISM RULES --- */
+    .comic-border {
+      border: 3px solid #111111;
+      border-radius: 6px;
+    }
+
+    .shadow-black { box-shadow: 6px 6px 0px 0px #111111; }
+    .shadow-yellow { box-shadow: 6px 6px 0px 0px #FFD54A; }
+    .shadow-cyan { box-shadow: 6px 6px 0px 0px #89E7F7; }
+    .shadow-orange { box-shadow: 6px 6px 0px 0px #FF8A00; }
+
+    /* Interactive Spring Push Click Effects */
+    .push-btn {
+      cursor: pointer;
+      transition: transform 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
+    }
+    .push-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 4px 4px 0px 0px #111111;
+    }
+    .push-btn:active {
+      transform: translate(6px, 6px);
+      box-shadow: 0px 0px 0px 0px #111111;
+    }
+
+    /* Playful Notebook Header Strips */
+    .sticky-header {
+      position: relative;
+      display: inline-block;
+      background-color: #FFD54A;
+      padding: 8px 16px;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transform: rotate(-1deg);
+      text-transform: uppercase;
+    }
+    .sticky-header::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      left: 25%;
+      width: 60px;
+      height: 22px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-left: 2px dashed #111111;
+      border-right: 2px dashed #111111;
+      transform: rotate(2deg);
+    }
+
+    /* --- BENTO CONTAINER LAYOUT --- */
+    .bento-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    @media (min-width: 768px) {
+      .bento-grid { grid-template-columns: repeat(3, 1fr); }
+      .span-2 { grid-column: span 2; }
+      .span-3 { grid-column: span 3; }
+    }
+
+    .card {
+      background-color: #FFFFFF;
+      padding: 30px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-badge {
+      padding: 6px 12px;
+      background-color: #FFFFFF;
+      border: 2px solid #111111;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .skills-box .tag-badge {
+      background-color: #FFD54A;
+    }
+
+    /* Project Architectures */
+    .archive-row {
+      border-bottom: 3px dashed #111111;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .archive-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .archive-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .archive-meta a {
+      font-size: 0.85rem;
+      text-decoration: underline;
+      color: #111111;
+    }
+
+    /* Vertical Timelines */
+    .log-node {
+      position: relative;
+      padding-left: 25px;
+      border-left: 3px dashed #111111;
+      padding-bottom: 20px;
+    }
+    .log-node:last-child {
+      padding-bottom: 0;
+    }
+    .log-node::before {
+      content: '✏️';
+      position: absolute;
+      left: -12px;
+      top: -2px;
+      background: #FFFFFF;
+      font-size: 0.95rem;
+    }
+
+    /* Contact Links */
+    .comm-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    @media (min-width: 550px) {
+      .comm-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .comm-card {
+      padding: 14px;
+      background-color: #89E7F7;
+      text-decoration: none;
+      font-size: 0.85rem;
+      word-break: break-all;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+      <div class="container">
+          <div class="hero-grid">
+              <div class="hero-content">
+                  <div class="hero-greeting">HEY THERE! I'M</div>
+                  <h1 class="hero-name">Ananya Shukla</h1>
+                  <div class="hero-title">SOFTWARE DEVELOPER</div>
+                  <div class="hero-desc">
+                      "Building ideas into experiences through code." Transforming core programmatic logic arrays into fast web setups, functional data parsers, and custom automation mechanics.
+                  </div>
+                  <div class="hero-cta">
+                      <a href="#projects" class="btn btn-primary">📂 OPEN ARCHIVE</a>
+                      <a href="#contact" class="btn btn-secondary">✉️ CALL TERMINAL</a>
+                  </div>
+              </div>
+              <div class="photo-wrap">
+                  <div class="doodle-star ds-1"></div>
+                  <div class="doodle-star ds-2"></div>
+                  <div class="doodle-star ds-3"></div>
+                  <div class="doodle-star ds-4"></div>
+                  <div class="doodle-arrow da-1">🖎</div>
+                  <div class="doodle-arrow da-2">🛈</div>
+                  <div class="photo-frame">
+                      <!-- Live Dynamic Profile Image Pipe via GitHub -->
+                      <img src="https://github.com/anapearl06.png" alt="Ananya Shukla Profile Image Pipeline">
+                      <div class="photo-badge">CORE.EXE</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <div class="bento-grid">
+    
+    <div class="card comic-border shadow-cyan span-3">
+      <div class="sticky-header comic-border">📝 JOURNAL_OVERVIEW.md</div>
+      <p style="font-weight: 500; line-height: 1.6; margin-bottom: 20px; font-size: 1.05rem;">
+        I am a Computer Science Engineering student focused on logical system modeling, clean data management architectures, and backend workflow optimization. Deeply engaged in refining Data Structures &amp; Algorithms alongside crafting automated scrapers and runtime utilities to solve repetitive data tasks cleanly.
+      </p>
+      <div class="badge-cloud">
+        <span class="tag-badge">🧠 Problem Solving</span>
+        <span class="tag-badge">📂 System Automation</span>
+        <span class="tag-badge">🛡️ Core Java</span>
+        <span class="tag-badge">⚡ Advanced JavaScript</span>
+        <span class="tag-badge">🎛️ RESTful Paradigms</span>
+      </div>
+    </div>
+
+    <div class="card comic-border shadow-black span-2 skills-box">
+      <div class="sticky-header comic-border" style="background-color: #89E7F7;">🛠️ TECH_STACK_MATRIX</div>
+      
+      <div style="margin-bottom: 20px;">
+        <h3 class="section-title">📂 Execution Languages</h3>
+        <div class="badge-cloud">
+          <span class="tag-badge">Java</span> <span class="comic-border tag-badge">Python</span> <span class="tag-badge">JavaScript</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <h3 class="section-title">🕸️ Web Frameworks &amp; Architecture</h3>
+        <div class="badge-cloud">
+          <span class="tag-badge">HTML5</span> <span class="tag-badge">CSS3</span> <span class="tag-badge">Tailwind CSS</span> 
+          <span class="tag-badge">Flask Engine</span> <span class="tag-badge">REST APIs</span> <span class="tag-badge">Jinja Templates</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="section-title">💾 Storage &amp; Workflows</h3>
+        <div class="badge-cloud">
+          <span class="tag-badge">SQL</span> <span class="tag-badge">SQLite</span> <span class="tag-badge">Git Version Control</span> 
+          <span class="tag-badge">GitHub Space</span> <span class="tag-badge">VS Code Terminal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card comic-border shadow-yellow">
+      <div class="sticky-header comic-border" style="background-color: #FF8A00;">🎓 ACADEMIC_LOG</div>
+      <div style="margin-top: 10px;">
+        <h3 style="font-size: 1.1rem; text-transform: uppercase; margin-bottom: 8px;">Raj Kumar Goel Institute of Technology</h3>
+        <p style="font-size: 0.9rem; color: #333333; margin-bottom: 12px;">B.Tech — Computer Science and Engineering</p>
+        <span class="tag-badge" style="background-color: #111111; color: #FFFFFF; display: inline-block;">
+          📅 2025 - 2029
+        </span>
+      </div>
+    </div>
+
+    <div id="projects" class="card comic-border shadow-orange span-3">
+      <div class="sticky-header comic-border">🚀 DEPLOYED_BUILD_ARCHIVE</div>
+      
+      <div class="archive-row">
+        <div class="archive-meta">
+          <h3 style="font-size: 1.2rem;">⛓️ URL Shortener Web Application</h3>
+          <div>
+            <a href="#" target="_blank" rel="noopener noreferrer">[source_code]</a>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; font-weight: 500; margin-bottom: 12px; color: #222222; line-height: 1.4;">
+          Built a scalable redirection platform using Flask and SQLite mappings. Engineered atomic unique short-link algorithms, handled synchronous state tables, and developed dynamic conditional routing structures.
+        </p>
+        <div class="badge-cloud">
+          <span class="tag-badge">Python</span> <span class="tag-badge">Flask Engine</span> <span class="tag-badge">SQLite System</span>
+        </div>
+      </div>
+
+      <div class="archive-row">
+        <div class="archive-meta">
+          <h3 style="font-size: 1.2rem;">🎬 Movie Recommendation Engine</h3>
+          <div>
+            <a href="#" target="_blank" rel="noopener noreferrer">[source_code]</a>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; font-weight: 500; margin-bottom: 12px; color: #222222; line-height: 1.4;">
+          Processed preference arrays to build functional sorting maps matching targeted criteria vectors. Enhanced data processing routines to provide clean user personalization metrics.
+        </p>
+        <div class="badge-cloud">
+          <span class="tag-badge">Python Framework</span> <span class="tag-badge">Data Aggregation</span>
+        </div>
+      </div>
+
+      <div class="archive-row">
+        <div class="archive-meta">
+          <h3 style="font-size: 1.2rem;">🕸️ Web Scraping &amp; Data Pipeline Tool</h3>
+          <div>
+            <a href="#" target="_blank" rel="noopener noreferrer">[source_code]</a>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; font-weight: 500; margin-bottom: 12px; color: #222222; line-height: 1.4;">
+          Designed robust automation workflows that scan unstructured target nodes. Safely extracts metadata layers and parses elements down into clean relational datasets.
+        </p>
+        <div class="badge-cloud">
+          <span class="tag-badge">Python Scripting</span> <span class="tag-badge">Automation Pipelines</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card comic-border shadow-black">
+      <div class="sticky-header comic-border" style="background-color: #89E7F7;">📈 TIMELINE_LOG</div>
+      <div class="log-node">
+        <p style="font-size: 0.9rem; color: #FF8A00;">2025</p>
+        <p style="font-size: 0.8rem; margin-top: 4px;">Initiated CSE core track. Deep diving into structural OOP paradigms, Java compilation frameworks, and algorithmic logic.</p>
+      </div>
+      <div class="log-node">
+        <p style="font-size: 0.9rem; color: #FF8A00;">CURRENT RUNTIME</p>
+        <p style="font-size: 0.8rem; margin-top: 4px;">Assembling target-driven backend architectures, learning advanced scripting tasks, and cracking DSA configurations.</p>
+      </div>
+      <div class="log-node" style="padding-bottom: 0;">
+        <p style="font-size: 0.9rem; color: #FF8A00;">TARGET OBJECTIVE</p>
+        <p style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px;">⚙️ Core Software Engineer</p>
+      </div>
+    </div>
+
+    <div id="contact" class="card comic-border shadow-yellow span-2">
+      <div class="sticky-header comic-border" style="background-color: #FF8A00;">📬 ENDPOINT_DISPATCH</div>
+      <p style="font-size: 0.95rem; margin-bottom: 20px;">Have an engineering assignment or development challenge? Ping the nodes below:</p>
+      
+      <div class="comm-grid">
+        <a href="mailto:shuklaananya762@gmail.com" class="comm-card comic-border shadow-black push-btn">
+          <span>📧 shuklaananya762@gmail.com</span>
+        </a>
+        <a href="https://linkedin.com/in/ananyashukla12" target="_blank" rel="noopener noreferrer" class="comm-card comic-border shadow-black push-btn" style="background-color: #FFD54A;">
+          <span>💼 linkedin.com/in/ananyashukla12</span>
+        </a>
+        <a href="https://github.com/anapearl06" target="_blank" rel="noopener noreferrer" class="comm-card comic-border shadow-black push-btn" style="background-color: #FF8A00;">
+          <span>🐙 github.com/anapearl06</span>
+        </a>
+        <a href="tel:+919311539992" class="comm-card comic-border shadow-black push-btn" style="background-color: #FFFFFF;">
+          <span>📞 +91 93115 39992</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer style="text-align: center; margin-top: 60px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+    // Compiled manually via HTML &amp; CSS • Powered by Ananya Shukla ©️ 2026
+  </footer>
+
+</body>
+</html>
